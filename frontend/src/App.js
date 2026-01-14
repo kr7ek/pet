@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { saveCalculation, getHistory } from "./api";
 
 function App() {
-  const [number1, setNumber1] = useState("");
-  const [number2, setNumber2] = useState("");
-  const [operation, setOperation] = useState("+");
-  const [result, setResult] = useState(null);
+  const [elem, setText] = useState("");
+  const [val, setNumber] = useState("");
+  //const [operation, setOperation] = useState("+");
+  //const [result, setResult] = useState(null);
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
@@ -17,13 +17,13 @@ function App() {
     setHistory(res.data);
   };
 
-  const handleCalculate = async () => {
-    const res = await calculate({ number1: +number1, number2: +number2, operation });
-    setResult(res.data.result);
-  };
+  // const handleCalculate = async () => {
+  //   const res = await calculate({ number1: +number1, number2: +number2, operation });
+  //   setResult(res.data.result);
+  // };
 
   const handleSave = async () => {
-    await saveCalculation({ number1, number2, operation, result });
+    await saveCalculation({ elem, val });
     loadHistory();
   };
 
@@ -32,31 +32,31 @@ function App() {
       <h2>Calculator</h2>
 
       <input
-        type="number"
-        value={number1}
-        onChange={(e) => setNumber1(e.target.value)}
-        placeholder="Number 1"
+        type="text"
+        value={elem}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Voice"
       />
-      <select value={operation} onChange={(e) => setOperation(e.target.value)}>
+      {/* <select value={operation} onChange={(e) => setOperation(e.target.value)}>
         <option>+</option>
         <option>-</option>
         <option>*</option>
         <option>/</option>
-      </select>
+      </select> */}
       <input
         type="number"
-        value={number2}
-        onChange={(e) => setNumber2(e.target.value)}
-        placeholder="Number 2"
+        value={val}
+        onChange={(e) => setNumber(e.target.value)}
+        placeholder="Number"
       />
 
       <br /><br />
 
-      <button onClick={handleCalculate}>Calculate</button>
+      {/* <button onClick={handleCalculate}>Calculate</button> */}
 
-      {result !== null && (
+      {(
         <>
-          <h3>Result: {result}</h3>
+          <h3>Result: {}</h3>
           <button onClick={handleSave}>Save to History</button>
         </>
       )}
@@ -65,7 +65,7 @@ function App() {
       <ul>
         {history.map((item) => (
           <li key={item.id}>
-            {item.number1} {item.operation} {item.number2} = {item.result}
+            {item.elem} {item.val}
           </li>
         ))}
       </ul>
