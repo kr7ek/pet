@@ -1,5 +1,5 @@
 # Personal Expense Tracker (PET)
-**Stack:** React/Vue + Node/Express + Mongo/Postgres
+**Stack:** React + Node/Express + Postgres
 
 **Features:**
 * Add/edit/delete transactions
